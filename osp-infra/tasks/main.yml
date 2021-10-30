@@ -1,0 +1,19 @@
+---
+# tasks file for osp-infra creates Cloud instances in Openstack using vars/main.yml
+- name: Create instances
+  openstack.cloud.server:
+    cloud: "{{ guid }}-project"
+    name: "{{ instance.name }}"
+    image: "{{ instance.image }}"
+    key_name: "{{ instance.keypair }}"
+    flavor: "{{ instance.flavor }}"
+    security_groups: "{{ instance.security_group }}"
+    delete_fip: yes
+    wait: no
+    nics:
+      - net-name: "{{ instance.internal_network }}"
+    meta: "AnsibleGroup={{instance.metadata.AnsibleGroup}},deployment_name={{instance.metadata.deployment_name}}"
+  loop: "{{ instances }}"
+  loop_control:
+    loop_var: instance
+

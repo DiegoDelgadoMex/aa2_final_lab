@@ -1,0 +1,17 @@
+---
+- name: In-Memory Inventory
+  hosts: localhost
+  connection: local
+  gather_facts: false
+  vars:
+    guid: "{{ lookup('ENV','GUID') }}"
+    home: "{{ lookup('ENV','HOME') }}"
+    internal_domain: "example.com"
+
+  roles:
+    - memory-inv
+
+  post_tasks:
+    - name: Print hosts
+      debug:
+        var=groups

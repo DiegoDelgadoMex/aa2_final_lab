@@ -1,0 +1,10 @@
+---
+- name: Provision OSP servers
+  hosts: localhost
+  connection: local
+  gather_facts: false
+  vars:
+    guid: "{{ lookup('ENV','GUID') }}"
+
+  roles:
+    - osp-infra
