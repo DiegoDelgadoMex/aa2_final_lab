@@ -3,6 +3,7 @@
   hosts: localhost
   connection: local
   gather_facts: false
+  become: yes
   vars:
     guid: "{{ lookup('ENV','GUID') }}"
     home: "{{ lookup('ENV','HOME') }}"
@@ -10,6 +11,7 @@
 
   roles:
     - memory-inv
+    - osp-config
 
   post_tasks:
     - name: Print hosts

@@ -1,2 +1,4 @@
 ---
 # vars file for osp-config
+satellite_activationkey: gpte-labs-rhel8
+satellite_org: prod
