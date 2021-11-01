@@ -11,9 +11,15 @@
 
   roles:
     - memory-inv
-    - osp-config
 
   post_tasks:
     - name: Print hosts
       debug:
         var=groups
+
+- name: Config cloud instances
+  hosts: database_servers
+  become: yes
+
+  roles:
+    - osp-config

@@ -8,7 +8,7 @@ instances:
     security_group: 7cdc-HostSG
     internal_network: 7cdc-dev-network
     metadata:
-      AnsibleGroup: osp_instances
+      AnsibleGroup: database_servers 
       deployment_name: dev
 
   - name: app1
