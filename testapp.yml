@@ -1,0 +1,26 @@
+---
+
+- name: Create in mem inv
+  hosts: localhost
+  vars:
+    guid: "{{ lookup('ENV','GUID') }}"
+    home: "{{ lookup('ENV','HOME') }}"
+    internal_domain: "example.com"
+
+
+  roles:
+    - memory-inv
+
+  post_tasks:
+    - name: Show groups
+      debug: var=groups
+
+- name: Deploy, configure, and populate Postgres 10
+  hosts: app_servers 
+  become: true
+  gather_facts: false
+  tags:
+    - app_servers
+
+  roles:
+    - flaskapp

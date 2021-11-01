@@ -18,7 +18,7 @@
         var=groups
 
 - name: Config cloud instances
-  hosts: database_servers
+  hosts: app_servers
   become: yes
 
   roles:
