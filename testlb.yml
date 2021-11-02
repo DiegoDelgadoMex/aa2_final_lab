@@ -1,25 +1,26 @@
 ---
-- name: In-Memory Inventory
+
+- name: Create in mem inv
   hosts: localhost
-  connection: local
-  gather_facts: false
-  become: yes
   vars:
     guid: "{{ lookup('ENV','GUID') }}"
     home: "{{ lookup('ENV','HOME') }}"
     internal_domain: "example.com"
 
+
   roles:
     - memory-inv
 
   post_tasks:
-    - name: Print hosts
-      debug:
-        var=groups
+    - name: Show groups
+      debug: var=groups
 
-- name: Config cloud instances
+- name: Deploy, configure, and populate Postgres 10
   hosts: load_balancers 
-  become: yes
+  become: true
+  gather_facts: false
+  tags:
+    - load_balancers
 
   roles:
-    - osp-config
+    - haproxylb
